@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/checkTask"
         app:layout_constraintEnd_toEndOf="@+id/checkTask"
         app:layout_constraintTop_toTopOf="@+id/checkTask"
         app:srcCompat="@drawable/ic_baseline_edit_24"
