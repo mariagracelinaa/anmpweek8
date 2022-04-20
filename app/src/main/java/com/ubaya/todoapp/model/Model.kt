@@ -10,7 +10,11 @@ data class Todo(
     @ColumnInfo(name = "title")
     var title:String,
     @ColumnInfo(name = "notes")
-    var note:String){
+    var note:String,
+    @ColumnInfo(name = "priority")
+    var priority : Int
+){
+    //auto increment kalau di database biasa
     @PrimaryKey(autoGenerate = true)
     var uuid: Int = 0
 }

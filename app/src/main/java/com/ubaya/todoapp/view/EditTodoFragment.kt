@@ -10,12 +10,11 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.ubaya.todoapp.R
-import com.ubaya.todoapp.model.Todo
 import com.ubaya.todoapp.viewmodel.DetailTodoViewModel
 import kotlinx.android.synthetic.main.fragment_create_todo.*
 
-class CreateTodoFragment : Fragment() {
-    private lateinit var viewModel:DetailTodoViewModel
+class EditTodoFragment : Fragment() {
+    private lateinit var viewModel : DetailTodoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,16 +26,38 @@ class CreateTodoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DetailTodoViewModel::class.java)
 
+        viewModel = ViewModelProvider(this).get(DetailTodoViewModel::class.java)
+        val uuid = EditTodoFragmentArgs.fromBundle(requireArguments()).uuid
+        viewModel.fetch(uuid)
+        observeViewModel()
+
+        txtJudulTodo.text = "Edit Todo"
+        btnAdd.text = "Add Changes"
 
         btnAdd.setOnClickListener {
             var radio = view.findViewById<RadioButton>(radioGroupPriority.checkedRadioButtonId)
-            var todo = Todo(txtTitle.text.toString(), txtNotes.text.toString(), radio.tag.toString().toInt())
-            val list = listOf(todo)
-            viewModel.addTodo(list)
-            Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
+            viewModel.update(
+                uuid,
+                txtTitle.text.toString(),
+                txtNotes.text.toString(),
+                radio.tag.toString().toInt()
+            )
+            Toast.makeText(view.context, "Todo update", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(it).popBackStack()
         }
     }
+
+    private fun observeViewModel() {
+        viewModel.todoLD.observe(viewLifecycleOwner){
+            txtTitle.setText(it.title)
+            txtNotes.setText(it.note)
+            when(it.priority){
+                1 -> radioLow.isChecked = true
+                2 -> radioMedium.isChecked = true
+                else -> radioHigh.isChecked = true
+            }
+        }
+    }
+
 }
