@@ -28,6 +28,8 @@ class EditTodoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(DetailTodoViewModel::class.java)
+
+        //Menangkap id kiriman dari MainActivity
         val uuid = EditTodoFragmentArgs.fromBundle(requireArguments()).uuid
         viewModel.fetch(uuid)
         observeViewModel()

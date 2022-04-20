@@ -30,6 +30,7 @@ class DetailTodoViewModel (application:  Application)
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
 
+    //buat menangkan id notes/task yang dipilih lalu di load ke fragment
     fun fetch(uuid: Int){
         launch {
             val db = buildDb(getApplication())

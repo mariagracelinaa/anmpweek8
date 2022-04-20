@@ -32,9 +32,10 @@ class TodoListAdapter (val todoList:ArrayList<Todo>, val adapterOnClick : (Todo)
             checkTask.text = "[$priority] ${todoList[position].title.toString()}"
 
             checkTask.setOnCheckedChangeListener { compoundButton, b ->
-                adapterOnClick(todo)
+                if (b) adapterOnClick(todo)
             }
 
+            //kalau di klik edit, ke fragment edit
             btnEdit.setOnClickListener {
                 val action = TodoListFragmentDirections.actionEditTodo(todo.uuid)
                 Navigation.findNavController(it).navigate(action)
