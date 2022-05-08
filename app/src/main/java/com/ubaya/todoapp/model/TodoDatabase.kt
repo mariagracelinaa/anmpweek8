@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ubaya.todoapp.util.MIGRATION_1_2
 
+//nomor versi nya sesuai versi perubahan databasenya
 @Database(entities = arrayOf(Todo::class), version = 2)
 abstract class TodoDatabase : RoomDatabase() {
     //karena interface, jd lgsg panggil dgn abstract
@@ -19,6 +20,7 @@ abstract class TodoDatabase : RoomDatabase() {
         private val LOCK = Any()
 
         //untuk membuat database
+        //kalau ada migrasi, ditambahkan addMigration() sebelum build
         private fun buildDatabase(context : Context) =
             Room.databaseBuilder(
                         context.applicationContext,

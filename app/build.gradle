@@ -10,6 +10,12 @@ plugins {
 android {
     compileSdk 31
 
+    //Week 10
+    //Data Binding
+    dataBinding{
+        enabled true
+    }
+
     defaultConfig {
         applicationId "com.ubaya.todoapp"
         minSdk 21

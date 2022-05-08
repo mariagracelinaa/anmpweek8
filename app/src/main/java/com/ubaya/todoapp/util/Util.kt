@@ -8,6 +8,7 @@ import com.ubaya.todoapp.model.TodoDatabase
 
 val DB_NAME = "newtododb"
 
+//kalau ada migrasi, ditambahkan addMigration() sebelum build
 fun buildDb(context : Context) =
     Room.databaseBuilder(context, TodoDatabase::class.java,
         "newtododb").addMigrations(MIGRATION_1_2).build()

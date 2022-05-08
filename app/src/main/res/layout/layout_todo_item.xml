@@ -1,34 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <CheckBox
-        android:id="@+id/checkTask"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
-        android:text="CheckBox"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="todo"
+            type = "com.ubaya.todoapp.model.Todo">
+        </variable>
 
-    <ImageButton
-        android:id="@+id/btnEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/checkTask"
-        app:layout_constraintEnd_toEndOf="@+id/checkTask"
-        app:layout_constraintTop_toTopOf="@+id/checkTask"
-        app:srcCompat="@drawable/ic_baseline_edit_24"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        <variable
+            name="checkBoxListener"
+            type = "com.ubaya.todoapp.view.TodoCheckedChangeListener">
+        </variable>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="editListener"
+            type = "com.ubaya.todoapp.view.TodoEditClickListener">
+        </variable>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/checkTask"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:text="@{todo.title}"
+            android:onCheckedChanged="@{(cb, isChecked)-> checkBoxListener.onCheckedChanged(cb, isChecked, todo)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#FFFFFF"
+            android:tag="@{todo.uuid}"
+            android:onClick="@{editListener::onEditClick}"
+            app:layout_constraintBottom_toBottomOf="@+id/checkTask"
+            app:layout_constraintEnd_toEndOf="@+id/checkTask"
+            app:layout_constraintTop_toTopOf="@+id/checkTask"
+            app:srcCompat="@drawable/ic_baseline_edit_24"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
