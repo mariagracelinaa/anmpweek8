@@ -18,7 +18,11 @@ import kotlinx.android.synthetic.main.fragment_todo_list.*
 class TodoListFragment : Fragment() {
     private lateinit var viewModel:ListTodoViewModel
     //ini dpt uuid dr mn
-    private val todoListAdapter  = TodoListAdapter(arrayListOf(), { item -> viewModel.updateIsDone(8)})
+    private val todoListAdapter  = TodoListAdapter(arrayListOf()) {
+//            item -> viewModel.updateIsDone(it.uuid)
+        viewModel.updateIsDone(it.uuid)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
