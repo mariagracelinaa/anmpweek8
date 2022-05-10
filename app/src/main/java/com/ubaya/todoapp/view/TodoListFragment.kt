@@ -10,13 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ubaya.todoapp.R
+import com.ubaya.todoapp.model.Todo
 import com.ubaya.todoapp.viewmodel.DetailTodoViewModel
 import com.ubaya.todoapp.viewmodel.ListTodoViewModel
 import kotlinx.android.synthetic.main.fragment_todo_list.*
 
 class TodoListFragment : Fragment() {
     private lateinit var viewModel:ListTodoViewModel
-    private val todoListAdapter  = TodoListAdapter(arrayListOf(), { item -> viewModel.clearTask(item) })
+    //ini dpt uuid dr mn
+    private val todoListAdapter  = TodoListAdapter(arrayListOf(), { item -> viewModel.updateIsDone(8)})
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

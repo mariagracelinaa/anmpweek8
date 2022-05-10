@@ -25,7 +25,6 @@ class TodoListAdapter (val todoList:ArrayList<Todo>, val adapterOnClick : (Todo)
 //        val view = DataBindingUtil.inflate<>()
 
         return TodoViewHolder(view)
-
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
@@ -57,5 +56,4 @@ class TodoListAdapter (val todoList:ArrayList<Todo>, val adapterOnClick : (Todo)
         val action = TodoListFragmentDirections.actionEditTodo(uuid)
         Navigation.findNavController(view).navigate(action)
     }
-
 }

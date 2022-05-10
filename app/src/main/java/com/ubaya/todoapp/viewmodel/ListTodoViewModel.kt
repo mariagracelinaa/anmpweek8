@@ -27,20 +27,29 @@ class ListTodoViewModel (application: Application)
         loadingLD.value = true
         todoLoadErrorLD.value = false
         launch {
-//            val db = Room.databaseBuilder(
-//                getApplication(),
-//                TodoDatabase::class.java, "newtododb").build()
             val db = buildDb(getApplication())
             todoLD.value = db.todoDao().selectAllTodo()
         }
     }
 
-    fun clearTask(todo: Todo) {
+    //Buat kalau di check todonya terus ilang
+//    fun clearTask(todo: Todo) {
+//        launch {
+//            val db = Room.databaseBuilder(
+//                getApplication(),
+//                TodoDatabase::class.java, "newtododb").build()
+//            db.todoDao().deleteTodo(todo)
+//
+//            todoLD.value = db.todoDao().selectAllTodo()
+//        }
+//    }
+
+    fun updateIsDone(uuid : Int) {
         launch {
             val db = Room.databaseBuilder(
                 getApplication(),
                 TodoDatabase::class.java, "newtododb").build()
-            db.todoDao().deleteTodo(todo)
+            db.todoDao().updateDone(uuid)
 
             todoLD.value = db.todoDao().selectAllTodo()
         }

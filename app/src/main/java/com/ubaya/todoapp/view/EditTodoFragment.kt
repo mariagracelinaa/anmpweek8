@@ -45,13 +45,6 @@ class EditTodoFragment : Fragment(), TodoPriorityClickListener, TodoSaveChangesL
     private fun observeViewModel() {
         viewModel.todoLD.observe(viewLifecycleOwner){
             dataBinding.todo = it
-//            txtTitle.setText(it.title)
-//            txtNotes.setText(it.note)
-//            when(it.priority){
-//                1 -> radioLow.isChecked = true
-//                2 -> radioMedium.isChecked = true
-//                else -> radioHigh.isChecked = true
-//            }
         }
     }
 

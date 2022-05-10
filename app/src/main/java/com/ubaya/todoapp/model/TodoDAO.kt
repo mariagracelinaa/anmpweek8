@@ -9,7 +9,8 @@ interface TodoDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg todo:Todo)
 
-    @Query("SELECT * FROM todo ORDER BY priority DESC")
+    //tampil data yg is_done nya 0 aja
+    @Query("SELECT * FROM todo WHERE is_done = 0 ORDER BY priority DESC")
     suspend fun selectAllTodo(): List<Todo>
 
     @Query("SELECT * FROM todo WHERE uuid = :id")
@@ -21,4 +22,8 @@ interface TodoDAO {
     //week 9
     @Query("UPDATE todo SET title = :title, notes = :notes, priority = :priority WHERE uuid = :id")
     suspend fun update(id : Int, title : String, notes : String, priority: Int)
+
+    //week 9 tugas
+    @Query("UPDATE todo SET is_done = 1 WHERE uuid = :id")
+    suspend fun updateDone(id: Int)
 }

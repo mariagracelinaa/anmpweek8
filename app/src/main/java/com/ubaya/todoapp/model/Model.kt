@@ -12,7 +12,9 @@ data class Todo(
     @ColumnInfo(name = "notes")
     var note:String,
     @ColumnInfo(name = "priority")
-    var priority : Int
+    var priority : Int,
+    @ColumnInfo(name = "is_done")
+    var is_done : Int
 ){
     //auto increment kalau di database biasa
     @PrimaryKey(autoGenerate = true)

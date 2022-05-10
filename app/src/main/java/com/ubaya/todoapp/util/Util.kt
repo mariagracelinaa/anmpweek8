@@ -11,11 +11,19 @@ val DB_NAME = "newtododb"
 //kalau ada migrasi, ditambahkan addMigration() sebelum build
 fun buildDb(context : Context) =
     Room.databaseBuilder(context, TodoDatabase::class.java,
-        "newtododb").addMigrations(MIGRATION_1_2).build()
+        "newtododb").addMigrations(MIGRATION_1_2, MIGRATION_2_3).build()
 
 //Membuat migrasi database nya
 val MIGRATION_1_2 = object : Migration(1, 2){
     override fun migrate(database: SupportSQLiteDatabase) {
         database.execSQL("ALTER TABLE todo ADD COLUMN priority INTEGER DEFAULT 3 NOT NULL")
+    }
+}
+
+//Migrasi db week 9 tugas
+//is_done memakai integer, jika memakai boolean maka pengecekannya nanti ada di checkbox nya di check atau tidak
+val MIGRATION_2_3 = object : Migration(2, 3){
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("ALTER TABLE todo ADD COLUMN is_done INTEGER DEFAULT 0 NOT NULL")
     }
 }
