@@ -14,7 +14,9 @@ data class Todo(
     @ColumnInfo(name = "priority")
     var priority : Int,
     @ColumnInfo(name = "is_done")
-    var is_done : Int
+    var is_done : Int,
+    @ColumnInfo(name = "todo_date")
+    var todo_date: Int = 0
 ){
     //auto increment kalau di database biasa
     @PrimaryKey(autoGenerate = true)

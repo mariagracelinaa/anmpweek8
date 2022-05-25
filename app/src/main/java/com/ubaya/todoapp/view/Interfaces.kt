@@ -30,3 +30,12 @@ interface TodoSaveChangesListener{
         obj:Todo
     )
 }
+
+interface TodoAddListener{
+    fun onAddNewTodo(view: View)
+}
+
+interface TodoDateListener {
+    fun onDateClick(view: View)
+    fun onTimeClick(view: View)
+}
